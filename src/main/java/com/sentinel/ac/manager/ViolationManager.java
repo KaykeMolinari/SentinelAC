@@ -16,9 +16,11 @@ public final class ViolationManager {
     private static final LegacyComponentSerializer LEGACY = LegacyComponentSerializer.legacyAmpersand();
 
     private final SentinelAC plugin;
+    private final DiscordWebhookNotifier discord;
 
     public ViolationManager(SentinelAC plugin) {
         this.plugin = plugin;
+        this.discord = new DiscordWebhookNotifier(plugin);
     }
 
     /** Pode ser chamado de qualquer thread. Alertas e punições rodam na thread principal. */
@@ -53,6 +55,7 @@ public final class ViolationManager {
                 }
             }
             Bukkit.getConsoleSender().sendMessage(component);
+            discord.sendAlert(msg);
 
             if (vl >= max) {
                 punish(data, check, playerName, display);

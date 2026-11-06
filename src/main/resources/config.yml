@@ -3,6 +3,9 @@
 
 alerts:
   format: "&8[&cSentinel&8] &f%player% &7falhou &c%check% &8(&7VL %vl%/%max%&8) &7%info%"
+  discord:
+    # Cole aqui o URL do webhook do canal que receberá os alertas. Deixe vazio para desativar.
+    webhook-url: ""
 
 punishments:
   # VL máximo padrão (cada check pode sobrescrever com max-vl)

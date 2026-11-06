@@ -39,6 +39,14 @@ Não precisa instalar o PacketEvents separado (ele é embutido e relocado).
 - `/sentinel reload` – recarrega `config.yml`
 - `sentinel.admin`, `sentinel.alerts`, `sentinel.bypass`
 
+## Alertas no Discord
+
+1. No Discord, abra **Editar canal → Integrações → Webhooks**, crie um webhook no canal desejado e copie a URL.
+2. Cole a URL em `plugins/SentinelAC/config.yml`, no campo `alerts.discord.webhook-url`.
+3. Execute `/sentinel reload` para aplicar a configuração.
+
+Cada alerta de violação enviado no chat dos staff também será enviado ao canal do webhook. Para trocar o canal, basta trocar a URL; para desativar, deixe o campo vazio. Trate a URL do webhook como uma senha: quem a possuir pode publicar mensagens nesse canal.
+
 ## Como criar um novo check
 
 1. Crie uma classe em `check/impl/` estendendo `Check` e sobrescreva o hook que precisa
