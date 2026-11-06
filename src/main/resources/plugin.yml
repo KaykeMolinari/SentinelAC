@@ -1,0 +1,20 @@
+name: SentinelAC
+version: '${version}'
+main: com.sentinel.ac.SentinelAC
+api-version: '1.21'
+description: Anticheat para Paper 1.21.11 (movimento, combate, pacotes e mineração rápida)
+commands:
+  sentinel:
+    description: Comandos do SentinelAC
+    aliases: [sac]
+    usage: /sentinel <alerts|reload|vl <jogador>>
+permissions:
+  sentinel.admin:
+    description: Usar os comandos do SentinelAC
+    default: op
+  sentinel.alerts:
+    description: Receber alertas de violações
+    default: op
+  sentinel.bypass:
+    description: Ignorado por todos os checks
+    default: false

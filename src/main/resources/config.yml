@@ -1,0 +1,115 @@
+# SentinelAC - configuração
+# Depois de editar use /sentinel reload
+
+alerts:
+  format: "&8[&cSentinel&8] &f%player% &7falhou &c%check% &8(&7VL %vl%/%max%&8) &7%info%"
+
+punishments:
+  # VL máximo padrão (cada check pode sobrescrever com max-vl)
+  default-max-vl: 20
+  # Placeholders: %player% e %check%
+  default-commands:
+    - "kick %player% Vantagem injusta detectada (%check%)"
+
+vl-decay:
+  interval-seconds: 60
+  amount: 1.0
+
+# Cada check aceita: enabled, max-vl, commands (opcional) e opções próprias.
+checks:
+  # ---------------- Movimento ----------------
+  SpeedA:
+    enabled: true
+    max-vl: 15
+    setback: true
+    multiplier: 1.0
+    air-bonus: 0.22
+    ice-multiplier: 2.5
+    buffer-limit: 3
+  FlyA:            # flutuar (sem gravidade)
+    enabled: true
+    max-vl: 12
+    setback: true
+    hover-ticks: 8
+  FlyB:            # gravidade incorreta
+    enabled: true
+    max-vl: 15
+    setback: true
+    tolerance: 0.02
+    buffer-limit: 4
+  NoFallA:         # onGround falso
+    enabled: true
+    max-vl: 10
+    setback: true
+    buffer-limit: 3
+
+  # ---------------- Combate ----------------
+  ReachA:
+    enabled: true
+    max-vl: 10
+    cancel-hit: true
+    tolerance: 0.4
+    max-ping: 250
+    ping-factor: 0.1
+    buffer-limit: 2
+  KillAuraA:       # ataque sem balançar o braço
+    enabled: true
+    max-vl: 10
+    buffer-limit: 3
+  KillAuraB:       # vários alvos no mesmo tick
+    enabled: true
+    max-vl: 8
+    buffer-limit: 2
+  KillAuraC:       # bateu em alguém fora do campo de visão
+    enabled: true
+    max-vl: 10
+    cancel-hit: true
+    max-angle: 80.0
+    buffer-limit: 3
+  AutoClickerA:    # CPS alto
+    enabled: true
+    max-vl: 10
+    max-cps: 20
+    buffer-limit: 3
+  AutoClickerB:    # cliques consistentes demais
+    enabled: true
+    max-vl: 10
+    samples: 25
+    max-mean-ms: 160
+    min-std-ms: 10.0
+    buffer-limit: 2
+
+  # ---------------- Pacotes ----------------
+  BadPacketsA:
+    enabled: true
+    max-vl: 5
+  TimerA:
+    enabled: true
+    max-vl: 10
+    threshold-ms: 150
+    max-lag-bank-ms: 1500
+
+  # ---------------- Mineração rápida ----------------
+  FastBreakA:      # quebrou o bloco rápido demais para a ferramenta
+    enabled: true
+    max-vl: 10
+    cancel-break: true
+    min-progress: 0.85
+    tolerance-ms: 100
+    buffer-limit: 2
+  NukerA:          # muitos blocos por segundo / vários no mesmo tick
+    enabled: true
+    max-vl: 10
+    cancel-break: true
+    max-per-second: 14
+    max-per-tick: 1
+  NukerB:          # muitos minérios em pouco tempo
+    enabled: true
+    max-vl: 10
+    window-seconds: 5
+    max-ores: 14
+  NukerC:          # bloco longe demais do jogador
+    enabled: true
+    max-vl: 8
+    cancel-break: true
+    tolerance: 2.0
